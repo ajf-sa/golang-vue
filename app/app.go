@@ -55,7 +55,6 @@ func server(db *gorm.DB) error {
 	auth.Post("/logout", uHand.Logout)
 
 	app.Static("/static", "./static/dist")
-
 	app.Static("/", "./webapp")
 
 	app.Get("/*", func(ctx *fiber.Ctx) error {
