@@ -1,9 +1,13 @@
 package store
 
-import "gorm.io/gorm"
+import (
+	"github.com/alfuhigi/store-ajf-sa/pkg/store/category"
+	"gorm.io/gorm"
+)
 
 type Store struct {
 	gorm.Model
+	Categores  []*category.Category
 	Name       string
 	Descrption string
 	Phone      string
