@@ -1,0 +1,28 @@
+version: '3.3'
+services:
+    store-ajf-sa:
+      build:
+        context: ./
+        dockerfile: Dockerfile
+      pid : host
+      networks:
+        - default
+      volumes:
+        - ./app/static:/app/static
+        - ./app/cards:/app/cards
+
+      expose:
+        - "8000"   
+      ports: 
+          - "8888:8000"                                                                                                         
+      container_name: store-ajf-sa
+      hostname: store-ajf-sa
+      restart: always
+      environment:
+        - DATABASE_URL=postgres://admin:secret@db01:5432/store-ajf-sa
+    
+
+networks:  
+ default:
+  external:
+    name: ns2021-existing-network
