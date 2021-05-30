@@ -14,12 +14,12 @@ type UHandler interface {
 }
 
 type uHandler struct {
-	//TODO
+	uService UService
 }
 
-func NewUHandler() UHandler {
+func NewUHandler(uService UService) UHandler {
 	return &uHandler{
-		//TODO
+		uService,
 	}
 }
 

@@ -18,6 +18,7 @@ func main() {
 	if err != nil {
 		panic("failed to connect database")
 	}
+	// db.AutoMigrate(&user.User{})
 
 	if e := server(db); e != nil {
 		panic(e)
@@ -41,6 +42,17 @@ func server(db *gorm.DB) error {
 	app.Use(compress.New(compress.Config{
 		Level: compress.LevelBestSpeed, // 1
 	}))
+
+	api := app.Group("/api")
+
+	// user := api.Group("/user")
+	auth := api.Group("/auth")
+
+	uHand := userH(db)
+
+	auth.Post("/register", uHand.Register)
+	auth.Post("/local", uHand.Login)
+	auth.Post("/logout", uHand.Logout)
 
 	app.Static("/static", "./static/dist")
 
